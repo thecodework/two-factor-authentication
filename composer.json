@@ -1,0 +1,27 @@
+{
+    "name": "imrealashu/2f-authentication",
+    "description": "Two Factor Authentication (2FA) for Laravel",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "two-factor",
+        "authentication",
+        "2fa",
+        "rfc-6238"
+    ],
+    "authors": [
+        {
+            "name": "Ashish Singh",
+            "email": "imrealashu@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "Spomky-Labs/otphp": "^8.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Thecodework\\TwoFactorAuthenticatioin\\": "src/"
+        }
+    }
+}
