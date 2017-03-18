@@ -69,8 +69,6 @@ trait AuthenticatesUsersWith2Fa
             return redirect('verify-2fa')
                 ->withErrors($validator)
                 ->withInput();
-        } else {
-
         }
 
         # Flush the session.
