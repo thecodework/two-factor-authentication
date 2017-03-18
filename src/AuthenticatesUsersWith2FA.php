@@ -21,7 +21,7 @@ trait AuthenticatesUsersWith2Fa
     }
     public function verifyToken(Request $request)
     {
-        $userId = $request->session()->pull('2fa:user:id');
+        $userId = $request->session()->get('2fa:user:id');
         $user = User::find(decrypt($userId));
 
         $validator = Validator::make($request->all(), [
