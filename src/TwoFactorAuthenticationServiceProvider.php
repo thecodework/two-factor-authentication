@@ -13,12 +13,12 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/routes/routes.php');
-        $this->loadViewsFrom(__DIR__ . '/resources/views', '2fa');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', '2fa');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // $this->publishes([
-        //     __DIR__.'/resources/views' => base_path('resources/views/2fa')
-        // ]);
+        //      __DIR__.'/../database/migrations/' => database_path('migrations')
+        // ], 'migrations');
     }
     /**
      * Register any package services.
@@ -28,17 +28,5 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
     public function register()
     {
         // register
-    }
-
-    /**
-     * returns view file paths
-     *
-     * @return array|string[]
-     */
-    public function views()
-    {
-        return [
-            __DIR__ . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'views',
-        ];
     }
 }

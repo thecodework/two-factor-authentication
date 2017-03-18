@@ -1,6 +1,6 @@
 <?php
 
-namespace Thecodework\TwoFactorAuthentication\Controllers;
+namespace Thecodework\TwoFactorAuthentication\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\User;
