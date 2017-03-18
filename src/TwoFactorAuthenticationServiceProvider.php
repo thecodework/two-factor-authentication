@@ -12,9 +12,9 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // date_default_timezone_set('Asia/Kolkata');
         $this->loadRoutesFrom(__DIR__ . '/routes/routes.php');
         $this->loadViewsFrom(__DIR__ . '/resources/views', '2fa');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // $this->publishes([
         //     __DIR__.'/resources/views' => base_path('resources/views/2fa')
