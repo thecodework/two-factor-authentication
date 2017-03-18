@@ -39,6 +39,7 @@ trait AuthenticatesUsersWith2Fa
         );
 
         if ($totp->now() === $request->totp_token) {
+            $request->session()->forget('2fa:user:id');
             Auth::loginUsingId($user->id);
             return redirect()->intended(config('2fa-config.redirect_to'));
         } else {
