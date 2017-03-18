@@ -2,7 +2,7 @@
 
 # Laravel Two Factor Authentication (WIP)
 
-## Two Factor Authentication is an extra security layer for your application. Two Factor authentication implements TOTP defined in [RFC 6238](https://tools.ietf.org/html/rfc6238)
+Two Factor Authentication is an extra security layer for your application. Two Factor authentication implements TOTP defined in [RFC 6238](https://tools.ietf.org/html/rfc6238)
 
 This is a simple laravel package which lets you setup your two factor authentication in your existing applicaiton within a minute.
 
