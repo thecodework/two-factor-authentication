@@ -22,13 +22,16 @@ class TwoFactorAuthenticationController extends Controller
      */
     public function setupTwoFactorAuthentication(Request $request)
     {
-        $secret_key       = $this->base32EncodedString();
+        $secret_key       = $this->base32EncodedString(config('2fa-config.number_of_digits'));
         $user             = User::find($request->user()->id);
         $user->secret_key = $secret_key;
         $user->update();
         $totp = new TOTP(
             config('2fa-config.account_name'),
-            $secret_key
+            $secret_key,
+            10,
+            config('2fa-config.digest_algorithm'),
+            config('2fa-config.number_of_digits')
         );
 
         $barcode = $totp->getQrCodeUri();
