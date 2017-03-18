@@ -12,6 +12,12 @@ engines:
     enabled: true
   phpmd:
     enabled: true
+
+    checks:
+      Naming/ShortMethodName:
+        enabled: false
+      CleanCode/StaticAccess:
+        enabled: false
 ratings:
   paths:
   - "**.inc"
