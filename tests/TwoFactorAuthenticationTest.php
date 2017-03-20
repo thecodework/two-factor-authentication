@@ -7,7 +7,7 @@ class TwoFactorAuthenticationTest extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            'Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider'
+            'Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider',
         ];
     }
 }
