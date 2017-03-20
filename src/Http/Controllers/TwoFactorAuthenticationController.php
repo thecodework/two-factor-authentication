@@ -8,8 +8,9 @@ use Base32\Base32;
 use Illuminate\Http\Request;
 use OTPHP\TOTP;
 use Thecodework\TwoFactorAuthentication\AuthenticatesUsersWith2FA;
+use Thecodework\TwoFactorAuthentication\Contracts\TwoFactorAuthenticationInterface;
 
-class TwoFactorAuthenticationController extends Controller
+class TwoFactorAuthenticationController extends Controller implements TwoFactorAuthenticationInterface
 {
     use AuthenticatesUsersWith2FA;
 
