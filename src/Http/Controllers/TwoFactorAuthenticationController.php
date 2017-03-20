@@ -65,11 +65,10 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     public function verifyTwoFactorAuthentication(Request $request)
     {
         if ($request->session()->has('2fa:user:id')) {
+            $secret = getenv('HMAC_SECRET');
+            $signature = hash_hmac('sha256', decrypt($request->session()->get('2fa:user:id')), $secret);
 
-            $secret = getenv("HMAC_SECRET");
-            $signature = hash_hmac("sha256", decrypt($request->session()->get('2fa:user:id')), $secret);
-
-            if(md5($signature) !== md5($request->signature)){
+            if (md5($signature) !== md5($request->signature)) {
                 return redirect()->intended('login');
             }
 
