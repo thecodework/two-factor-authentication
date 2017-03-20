@@ -23,3 +23,6 @@ After requiring the package simply run
 $ php artisan migrate
 ```
 It will use the default User model and adds two columns `is_2fa_enabled` and `secret_key`
+
+## Contribution
+The Package is in WIP stage and we're making it ready for production. Feel free to create issues, submit PRs and talk about features and enhancement through proposing issue. 
