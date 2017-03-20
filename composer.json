@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.0.0",
         "Spomky-Labs/otphp": "^8.3",
         "laravel/framework": "5.4.*"
     },
