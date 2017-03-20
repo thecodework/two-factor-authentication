@@ -32,7 +32,7 @@ class BaseTestCase extends TestCase
 
     protected function AddTwoFactorAuthenticationRequiredFields()
     {
-        include_once '__DIR__'.'/../database/migrations/2017_03_18_000012_add_two_factor_authentication_required_fields.php';
+        include_once '__DIR__' . '/../database/migrations/2017_03_18_000012_add_two_factor_authentication_required_fields.php';
 
         $this->createUsersTable();
         (new \AddTwoFactorAuthenticationRequiredFields())->up();
@@ -40,12 +40,12 @@ class BaseTestCase extends TestCase
 
     public function getTempDirectory(): string
     {
-        return __DIR__.'/temp';
+        return __DIR__ . '/temp';
     }
 
     protected function resetDatabase()
     {
-        file_put_contents($this->getTempDirectory().'/database.sqlite', null);
+        file_put_contents($this->getTempDirectory() . '/database.sqlite', null);
     }
 
     protected function setUpDatabase()
@@ -72,7 +72,7 @@ class BaseTestCase extends TestCase
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
             'driver'   => 'sqlite',
-            'database' => $this->getTempDirectory().'/database.sqlite',
+            'database' => $this->getTempDirectory() . '/database.sqlite',
             'prefix'   => '',
         ]);
         $app['config']->set('auth.providers.users.model', User::class);
