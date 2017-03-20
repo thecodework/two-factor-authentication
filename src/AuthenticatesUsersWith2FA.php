@@ -29,9 +29,10 @@ trait AuthenticatesUsersWith2FA
     {
         if ($user->is_2fa_enabled) {
             $request->session()->put('2fa:user:id', encrypt($user->id));
+            $secret = getenv("HMAC_SECRET");
+            $signature = hash_hmac("sha256", $user->id, $secret);
             Auth::logout();
-
-            return redirect()->intended('verify-2fa');
+            return redirect()->intended('verify-2fa?signature=' . $signature);
         }
 
         return redirect()->intended(config('2fa-config.redirect_to'));
@@ -61,7 +62,6 @@ trait AuthenticatesUsersWith2FA
                 config('2fa-config.account_name'),
                 $this->user->secret_key
             );
-
             return $value == $totp->now();
         });
 
