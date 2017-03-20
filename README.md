@@ -69,7 +69,7 @@ use AuthenticatesUsers, AuthenticatesUsersWith2FA {
         }
 ```
 Now log into your application and visit `setup-2fa` route it will show a barcode which can be scanned either using Google Authenticator or Authy mobile application.
-Scan that code and click *Enable Two Factor Authentication" and done.
+Scan that code and click *Enable Two Factor Authentication* and done.
 
 Logout and login again, it will ask you to enter Token which is being shown in the mobile application. Enter the token and you're logged in.
 
