@@ -70,8 +70,10 @@ trait AuthenticatesUsersWith2FA
             'totp_token' => 'required|digits:6|valid_token',
         ], $messages);
 
+        $secret = getenv("HMAC_SECRET");
+        $signature = hash_hmac("sha256", $this->user->id, $secret);
         if ($validator->fails()) {
-            return redirect('verify-2fa')
+            return redirect('verify-2fa?signature=' . $signature)
                 ->withErrors($validator)
                 ->withInput();
         }
