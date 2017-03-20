@@ -19,7 +19,7 @@
     "require": {
         "php": ">=7.0.0",
         "Spomky-Labs/otphp": "^8.3",
-        "laravel/framework": "^5.2"
+        "laravel/framework": ">= 5.2"
     },
     "autoload": {
         "psr-4": {
