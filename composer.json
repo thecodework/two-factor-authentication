@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Thecodework\\TwoFactorAuthenticatioin\\": "src/"
+            "Thecodework\\TwoFactorAuthentication\\": "src/"
         }
     },
     "autoload-dev": {
