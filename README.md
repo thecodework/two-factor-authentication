@@ -14,7 +14,7 @@ This is a simple laravel package which lets you setup your two factor authentica
 ## Installation
 
 ```bash
-$ composer require thecodework/laravel-two-factor-authentication
+$ composer require thecodework/two-factor-authentication
 ```
 
 After requiring the package simply run
