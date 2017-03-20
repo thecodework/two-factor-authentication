@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddTwoFactorAuthenticationRequiredFields extends Migration
 {
@@ -13,8 +14,8 @@ class AddTwoFactorAuthenticationRequiredFields extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->increments('is_2fa_enabled')->before('create_at');
-            $table->string('secret_key')->after('is_2fa_enabled');
+            $table->smallInteger('is_2fa_enabled')->default(0)->before('create_at');
+            $table->string('secret_key')->nullable()->after('is_2fa_enabled');
         });
     }
 
