@@ -27,5 +27,5 @@ return [
      * Number of digits can be max 30
      * To Support Google Authenticator
      */
-    'number_of_digits' => 8
+    'number_of_digits' => 8,
 ];
