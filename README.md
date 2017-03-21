@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/thecodework/two-factor-authentication.svg?branch=master)](https://travis-ci.org/thecodework/two-factor-authentication)
 [![Code Climate](https://codeclimate.com/github/thecodework/laravel-two-factor-authentication.png)](https://codeclimate.com/github/thecodework/laravel-two-factor-authentication)
 [![StyleCI](https://styleci.io/repos/85341644/shield?branch=master)](https://styleci.io/repos/85341644)
 
@@ -28,7 +29,7 @@ To publish config file
 $ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider" --tag=config
 ```
 Once the config file is published you can navigate to config directory of your application and look for `2fa-config.php` file and change configuration as you want.
-The config file will look like this and have following configurable option. 
+The config file will look like this and have following configurable option.
 ```php
     /*
      * Specify redirect url after when token authentication
