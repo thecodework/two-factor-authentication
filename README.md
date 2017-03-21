@@ -78,4 +78,4 @@ $ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\Two
 ```
 
 ## Contribution
-The Package is in WIP stage and we're making it ready for production. Feel free to create issues, submit PRs and talk about features and enhancement through proposing issue. If you find any security issue, instead of creating an issue send an email to [imrealashu@gmail.com](mailto:imrealashu@gmail.com).
+Feel free to create issues, submit PRs and talk about features and enhancement through proposing issue. If you find any security consideration, instead of creating an issue send an email to [imrealashu@gmail.com](mailto:imrealashu@gmail.com).
