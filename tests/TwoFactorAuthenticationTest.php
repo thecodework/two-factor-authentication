@@ -5,7 +5,8 @@ namespace Thecodework\TwoFactorAuthentication\Tests;
 class TwoFactorAuthenticationTest extends BaseTestCase
 {
     /**
-     * Test Users count after inserting one row
+     * Test Users count after inserting one row.
+     *
      * @test
      */
     public function getUsers()
