@@ -27,7 +27,7 @@ trait AuthenticatesUsersWith2FA
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->is_2fa_enabled) {
+        if ($user->is_two_factor_enabled) {
             $request->session()->put('2fa:user:id', encrypt($user->id));
             $secret = getenv('HMAC_SECRET');
             $signature = hash_hmac('sha256', $user->id, $secret);
@@ -61,7 +61,7 @@ trait AuthenticatesUsersWith2FA
         Validator::extendImplicit('valid_token', function ($attribute, $value) {
             $totp = new TOTP(
                 config('2fa-config.account_name'),
-                $this->user->secret_key
+                $this->user->two_factor_secret_key
             );
 
             return $value == $totp->now();
