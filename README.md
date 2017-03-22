@@ -59,7 +59,7 @@ The config file will look like this and have following configurable option.
     'number_of_digits' => 8,
 ```
 
-Now the config file is placed. The last thing you've to do is add `AuthenticatesUsersWith2FA` trait in `Http/Controllers/Auth/LoginController.php` file which helps to introduce verify-2fa page after each login.
+Now the config file is placed. The last thing to do is addding `AuthenticatesUsersWith2FA` trait in the  `Http/Controllers/Auth/LoginController.php` file which helps to stop user at verify-2fa page to enter TOTP token after each login.
 
 The final snippet will look like this.
 ```php
