@@ -60,6 +60,7 @@ Finally publish config file
 $ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider" --tag=config
 ```
 Once the config file is published you can navigate to config directory of your application and look for `2fa-config.php` file and change configuration as you want.
+
 **6. Setup 2FA for user**
 
 Now login to the application and visit `/setup-2fa/` route, which will show a barcode which can be scanned either using Google Authenticator or Authy mobile application as described above.
