@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/thecodework/two-factor-authentication.svg?branch=master)](https://travis-ci.org/thecodework/two-factor-authentication)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodework/two-factor-authentication/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/thecodework/two-factor-authentication/?branch=master)[![StyleCI](https://styleci.io/repos/85341644/shield?branch=master)](https://styleci.io/repos/85341644)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodework/two-factor-authentication/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/thecodework/two-factor-authentication/?branch=master)
+[![StyleCI](https://styleci.io/repos/85341644/shield?branch=master)](https://styleci.io/repos/85341644)
 
 # Laravel Two Factor Authentication
 
