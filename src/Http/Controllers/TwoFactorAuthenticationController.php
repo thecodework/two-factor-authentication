@@ -44,7 +44,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      *
      * @param \Illuminate\Http\Request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
@@ -81,7 +81,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      *
      * @param int $length Length of the encoded string.
      *
-     * @return void
+     * @return string
      */
     private function base32EncodedString($length = 30):
     string
