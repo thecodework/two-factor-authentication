@@ -59,8 +59,6 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * Verify Two Factor Authentication.
      *
      * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function verifyTwoFactorAuthentication(Request $request)
     {
