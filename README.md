@@ -14,12 +14,14 @@ This package lets you setup your two factor authentication for your existing lar
 
 ## Installation
 **1. Composer Install**
+
 ```bash
 $ composer require thecodework/two-factor-authentication:0.1.0
 ```
 Note: The current version of the package is beta release, so be careful before using it for production applications.
 
 **2. Add Service Provider**
+
 After requiring the package add `TwoFactorAuthenticationServiceProvider::class` into providors array in `app.php` confi file
 
 ```php
@@ -32,6 +34,7 @@ After requiring the package add `TwoFactorAuthenticationServiceProvider::class` 
 ```
 
 **3. Run Migrations**
+
 Now run the migration
 ```bash
 $ php artisan migrate
@@ -39,6 +42,7 @@ $ php artisan migrate
 It will use the default User model and adds two columns `is_2fa_enabled` and `secret_key`.
 
 **4. Add `AuthenticatesUserWith2FA` trait in the LoginController**
+
 Now the config file is placed. The last thing to do is addding `AuthenticatesUsersWith2FA` trait in the  `Http/Controllers/Auth/LoginController.php` file which helps to stop user at verify-2fa page to enter TOTP token after each login.
 
 The final snippet will look like this.
@@ -50,6 +54,7 @@ use AuthenticatesUsers, AuthenticatesUsersWith2FA {
 Note: Don't forget to include use statement `use Thecodework\TwoFactorAuthentication\AuthenticatesUsersWith2FA` in the header.
 
 **5. Publish the ConfigFile**
+
 Finally publish config file
 ```
 $ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider" --tag=config
