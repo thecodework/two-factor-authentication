@@ -8,8 +8,8 @@ Two Factor Authentication is an extra security layer for your application. Two F
 
 This package lets you setup your two factor authentication for your existing laravel applicaiton within a minute.
 ## Requirements
-  - PHP 7.0 or Up
-  - Laravel 5 or Up
+  - PHP >= 7.0
+  - Laravel >= 5.3
   - Google Authenticator [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en) - [iOS](https://itunes.apple.com/in/app/google-authenticator/id388497605?mt=8) or [Authy](https://www.authy.com/) mobile app
 
 ## Installation
@@ -60,6 +60,7 @@ Finally publish config file
 $ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider" --tag=config
 ```
 Once the config file is published you can navigate to config directory of your application and look for `2fa-config.php` file and change configuration as you want.
+
 **6. Setup 2FA for user**
 
 Now login to the application and visit `/setup-2fa/` route, which will show a barcode which can be scanned either using Google Authenticator or Authy mobile application as described above.
