@@ -22,9 +22,14 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function setupTwoFactorAuthentication(Request $request)
     {
-        $secret_key = $this->base32EncodedString(config('2fa-config.number_of_digits'));
         $user = User::find($request->user()->id);
-        $user->two_factor_secret_key = $secret_key;
+
+        if (!$user->two_factor_secret_key) {
+            $user->two_factor_secret_key = $this->base32EncodedString(config('2fa-config.number_of_digits'));
+        } else {
+            $secret_key = $user->two_factor_secret_key;
+        }
+
         $user->update();
         $totp = new TOTP(
             config('2fa-config.account_name'),
@@ -48,7 +53,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
-        $user = User::find($request->user()->id);
+        $user                        = User::find($request->user()->id);
         $user->is_two_factor_enabled = 1;
         $user->update();
 
@@ -63,7 +68,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     public function verifyTwoFactorAuthentication(Request $request)
     {
         if ($request->session()->has('2fa:user:id')) {
-            $secret = getenv('HMAC_SECRET');
+            $secret    = getenv('HMAC_SECRET');
             $signature = hash_hmac('sha256', decrypt($request->session()->get('2fa:user:id')), $secret);
 
             if (md5($signature) !== md5($request->signature)) {
@@ -84,8 +89,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function base32EncodedString($length = 30):
-    string
-    {
+    string {
         return Base32::encode($this->strRandom($length));
     }
 
@@ -97,8 +101,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function strRandom($length = 30):
-    string
-    {
+    string{
         $string = '';
 
         while (($len = strlen($string)) < $length) {
