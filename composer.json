@@ -5,7 +5,7 @@
     "license": "MIT",
     "keywords": [
         "laravel",
-        "Laravel 5"
+        "Laravel 5",
         "two-factor",
         "authentication",
         "2fa",
