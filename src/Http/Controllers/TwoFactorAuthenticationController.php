@@ -84,7 +84,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function base32EncodedString($length = 30):
-    string {
+    string
+    {
         return Base32::encode($this->strRandom($length));
     }
 
@@ -96,7 +97,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function strRandom($length = 30):
-    string{
+    string
+    {
         $string = '';
 
         while (($len = strlen($string)) < $length) {
