@@ -18,7 +18,6 @@ This package lets you setup your two factor authentication for your existing lar
 ```bash
 $ composer require thecodework/two-factor-authentication:0.1.1
 ```
-Note: The current version of the package is beta release, so be careful before using it for production applications.
 
 **2. Add Service Provider**
 
@@ -62,11 +61,17 @@ $ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\Two
 Once the config file is published you can navigate to config directory of your application and look for `2fa-config.php` file and change configuration as you want.
 
 **6. Setup 2FA for user**
-
+ 
+**- Enable 2FA**
+ 
 Now login to the application and visit `/setup-2fa/` route, which will show a barcode which can be scanned either using Google Authenticator or Authy mobile application as described above.
 Scan that code and click **Enable Two Factor Authentication**.
+** - Disable 2FA**
+To disable Two Factor, visit `/setup-2fa` route, which will now show a **Disable Two Factor Authentication** button. Click to disable 2FA for your account.
 
-Now perform logout and log back in again, it will ask you to enter Token which can be obtain from the authenticator mobile application. Enter the token and you're logged in.
+**7. Testing 2FA**
+
+Now to test 2FA, perform logout and log back in again, it will ask you to enter Token which can be obtain from the authenticator mobile application. Enter the token and you're logged in.
 
 ### Additionally
 If you want to publish views, and migration as well along with config file then run
