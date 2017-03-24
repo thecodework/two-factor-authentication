@@ -16,7 +16,7 @@ This package lets you setup your two factor authentication for your existing lar
 **1. Composer Install**
 
 ```bash
-$ composer require thecodework/two-factor-authentication:0.1.0
+$ composer require thecodework/two-factor-authentication:0.1.1
 ```
 Note: The current version of the package is beta release, so be careful before using it for production applications.
 
@@ -27,7 +27,7 @@ After requiring the package add `TwoFactorAuthenticationServiceProvider::class` 
 ```php
 [
  'providers' => [
-    //... 
+    //...
     Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider::class
   ]
 ]
