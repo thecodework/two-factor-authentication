@@ -36,11 +36,11 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
 
         $barcode = $totp->getQrCodeUri();
 
-        return view('2fa::setup', compact('barcode'));
+        return view('2fa::setup', compact('barcode','user'));
     }
 
     /**
-     * Enable 2FA.
+     * Disable 2FA.
      *
      * @param \Illuminate\Http\Request
      *
@@ -50,6 +50,23 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     {
         $user = User::find($request->user()->id);
         $user->is_two_factor_enabled = 1;
+        $user->update();
+
+        return redirect('home');
+    }
+
+    /**
+     * Enable 2FA.
+     *
+     * @param \Illuminate\Http\Request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function disableTwoFactorAuthentication(Request $request)
+    {
+        $user = User::find($request->user()->id);
+        $user->is_two_factor_enabled = 0;
+        $user->two_factor_secret_key = '';
         $user->update();
 
         return redirect('home');

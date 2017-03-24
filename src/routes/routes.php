@@ -5,4 +5,5 @@ Route::group(['middleware' => ['web'], 'namespace' => '\Thecodework\TwoFactorAut
     Route::post('verify-2fa', 'TwoFactorAuthenticationController@verifyToken');
     Route::get('setup-2fa', 'TwoFactorAuthenticationController@setupTwoFactorAuthentication');
     Route::post('enable-2fa', 'TwoFactorAuthenticationController@enableTwoFactorAuthentication');
+    Route::post('disable-2fa', 'TwoFactorAuthenticationController@disableTwoFactorAuthentication');
 });
