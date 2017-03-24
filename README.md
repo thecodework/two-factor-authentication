@@ -62,12 +62,12 @@ Once the config file is published you can navigate to config directory of your a
 
 **6. Setup 2FA for user**
  
-**- Enable 2FA**
+  **• Enable 2FA**
  
 Now login to the application and visit `/setup-2fa/` route, which will show a barcode which can be scanned either using Google Authenticator or Authy mobile application as described above.
 Scan that code and click **Enable Two Factor Authentication**.
 
-**- Disable 2FA**
+  **• Disable 2FA**
 
 To disable Two Factor, visit `/setup-2fa` route, which will now show a **Disable Two Factor Authentication** button. Click to disable 2FA for your account.
 
