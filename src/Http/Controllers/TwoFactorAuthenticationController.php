@@ -36,7 +36,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
 
         $barcode = $totp->getQrCodeUri();
 
-        return view('2fa::setup', compact('barcode','user'));
+        return view('2fa::setup', compact('barcode', 'user'));
     }
 
     /**
