@@ -16,7 +16,7 @@ This package lets you setup your two factor authentication for your existing lar
 **1. Composer Install**
 
 ```bash
-$ composer require thecodework/two-factor-authentication:0.1.1
+$ composer require thecodework/two-factor-authentication
 ```
 
 **2. Add Service Provider**
