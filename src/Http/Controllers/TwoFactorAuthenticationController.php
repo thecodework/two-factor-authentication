@@ -23,19 +23,18 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     public function setupTwoFactorAuthentication(Request $request)
     {
         $user = User::find($request->user()->id);
-        $user->two_factor_secret_key !== '' ? $secret_key = $user->two_factor_secret_key : $secret_key = $this->base32EncodedString(config('2fa-config.number_of_digits'));
-        $user->two_factor_secret_key = $secret_key;
+        $user->two_factor_secret_key = $user->two_factor_secret_key ?? $this->base32EncodedString(config('2fa-config.number_of_digits'));
         $user->update();
+
         $totp = new TOTP(
             config('2fa-config.account_name'),
-            $secret_key,
+            $user->two_factor_secret_key,
             10,
             config('2fa-config.digest_algorithm'),
             config('2fa-config.number_of_digits')
         );
 
         $barcode = $totp->getQrCodeUri();
-
         return view('2fa::setup', compact('barcode', 'user'));
     }
 
@@ -66,7 +65,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     {
         $user = User::find($request->user()->id);
         $user->is_two_factor_enabled = 0;
-        $user->two_factor_secret_key = '';
+        $user->two_factor_secret_key = null;
         $user->update();
 
         return redirect('home');

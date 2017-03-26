@@ -15,7 +15,7 @@ class AddTwoFactorAuthenticationRequiredFields extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->smallInteger('is_two_factor_enabled')->default(0)->before('create_at');
-            $table->string('two_factor_secret_key')->nullable()->after('is_2fa_enabled');
+            $table->string('two_factor_secret_key')->nullable()->default(null)->after('is_2fa_enabled');
         });
     }
 
