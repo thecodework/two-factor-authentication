@@ -10,13 +10,13 @@ This package lets you setup your two factor authentication for your existing lar
 ## Requirements
   - PHP >= 7.0
   - Laravel >= 5.3
-  - Google Authenticator [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en) - [iOS](https://itunes.apple.com/in/app/google-authenticator/id388497605?mt=8) or [Authy](https://www.authy.com/) mobile app
+  - Google Authenticator [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en) - [iOS](https://itunes.apple.com/in/app/google-authenticator/id388497605?mt=8) (Recommended) or [Authy](https://www.authy.com/) mobile app
 
 ## Installation
 **1. Composer Install**
 
 ```bash
-$ composer require thecodework/two-factor-authentication:0.1.1
+$ composer require thecodework/two-factor-authentication
 ```
 
 **2. Add Service Provider**
@@ -62,12 +62,12 @@ Once the config file is published you can navigate to config directory of your a
 
 **6. Setup 2FA for user**
  
-**- Enable 2FA**
+  **• Enable 2FA**
  
 Now login to the application and visit `/setup-2fa/` route, which will show a barcode which can be scanned either using Google Authenticator or Authy mobile application as described above.
 Scan that code and click **Enable Two Factor Authentication**.
 
-** - Disable 2FA**
+  **• Disable 2FA**
 
 To disable Two Factor, visit `/setup-2fa` route, which will now show a **Disable Two Factor Authentication** button. Click to disable 2FA for your account.
 
