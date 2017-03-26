@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/thecodework/two-factor-authentication.svg?branch=master)](https://travis-ci.org/thecodework/two-factor-authentication)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodework/two-factor-authentication/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/thecodework/two-factor-authentication/?branch=master)
 [![StyleCI](https://styleci.io/repos/85341644/shield?branch=master)](https://styleci.io/repos/85341644)
+[![Total Downloads](https://poser.pugx.org/thecodework/two-factor-authentication/downloads)](https://packagist.org/packages/thecodework/two-factor-authentication)
+[![License](https://poser.pugx.org/thecodework/two-factor-authentication/license)](https://packagist.org/packages/thecodework/two-factor-authentication)
 
 # Laravel Two Factor Authentication
 
@@ -61,9 +63,9 @@ $ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\Two
 Once the config file is published you can navigate to config directory of your application and look for `2fa-config.php` file and change configuration as you want.
 
 **6. Setup 2FA for user**
- 
+
   **• Enable 2FA**
- 
+
 Now login to the application and visit `/setup-2fa/` route, which will show a barcode which can be scanned either using Google Authenticator or Authy mobile application as described above.
 Scan that code and click **Enable Two Factor Authentication**.
 
