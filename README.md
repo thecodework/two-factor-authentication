@@ -10,7 +10,7 @@ This package lets you setup your two factor authentication for your existing lar
 ## Requirements
   - PHP >= 7.0
   - Laravel >= 5.3
-  - Google Authenticator [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en) - [iOS](https://itunes.apple.com/in/app/google-authenticator/id388497605?mt=8) or [Authy](https://www.authy.com/) mobile app
+  - Google Authenticator [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en) - [iOS](https://itunes.apple.com/in/app/google-authenticator/id388497605?mt=8) (Recommended) or [Authy](https://www.authy.com/) mobile app
 
 ## Installation
 **1. Composer Install**
