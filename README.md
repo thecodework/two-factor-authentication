@@ -8,7 +8,6 @@
 
 Two Factor Authentication is an extra security layer for your application. Two Factor authentication implements TOTP defined in [RFC 6238](https://tools.ietf.org/html/rfc6238)
 
-This package lets you setup your two factor authentication for your existing laravel applicaiton within a minute.
 ## Requirements
   - PHP >= 7.0
   - Laravel >= 5.3
