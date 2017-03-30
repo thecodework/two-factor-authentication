@@ -49,7 +49,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      *
      * @param \Illuminate\Http\Request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return mixed
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
@@ -73,7 +73,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      *
      * @param \Illuminate\Http\Request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return mixed
      */
     public function disableTwoFactorAuthentication(Request $request)
     {
