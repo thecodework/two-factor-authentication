@@ -35,6 +35,12 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         );
 
         $barcode = $totp->getQrCodeUri();
+
+        // Return Barcode image if ajax Request
+        if($request->ajax())
+        {
+            return $barcode;
+        }
         return view('2fa::setup', compact('barcode', 'user'));
     }
 
@@ -51,6 +57,14 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $user->is_two_factor_enabled = 1;
         $user->update();
 
+        if ($request-ajax()) {
+            return [
+                'data' => [
+                    'message' => 'success',
+                    'description' => '2FA Enabled'
+                ]
+            ];
+        }
         return redirect('home');
     }
 
@@ -68,6 +82,14 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $user->two_factor_secret_key = null;
         $user->update();
 
+        if ($request-ajax()) {
+            return [
+                'data' => [
+                    'message' => 'success',
+                    'description' => '2FA Disabled'
+                ]
+            ];
+        }
         return redirect('home');
     }
 
