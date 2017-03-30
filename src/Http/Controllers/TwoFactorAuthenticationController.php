@@ -37,10 +37,10 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $barcode = $totp->getQrCodeUri();
 
         // Return Barcode image if ajax Request
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             return $barcode;
         }
+
         return view('2fa::setup', compact('barcode', 'user'));
     }
 
@@ -57,12 +57,12 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $user->is_two_factor_enabled = 1;
         $user->update();
 
-        if ($request-ajax()) {
+        if ($request - ajax()) {
             return [
                 'data' => [
                     'message' => 'success',
-                    'description' => '2FA Enabled'
-                ]
+                    'description' => '2FA Enabled',
+                ],
             ];
         }
         return redirect('home');
@@ -82,12 +82,12 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $user->two_factor_secret_key = null;
         $user->update();
 
-        if ($request-ajax()) {
+        if ($request - ajax()) {
             return [
                 'data' => [
                     'message' => 'success',
-                    'description' => '2FA Disabled'
-                ]
+                    'description' => '2FA Disabled',
+                ],
             ];
         }
         return redirect('home');
@@ -122,8 +122,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function base32EncodedString($length = 30):
-    string
-    {
+    string {
         return Base32::encode($this->strRandom($length));
     }
 
@@ -135,8 +134,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function strRandom($length = 30):
-    string
-    {
+    string{
         $string = '';
 
         while (($len = strlen($string)) < $length) {
