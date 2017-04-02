@@ -57,7 +57,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $user->is_two_factor_enabled = 1;
         $user->update();
 
-        if ($request - ajax()) {
+        if ($request -> ajax()) {
             return [
                 'data' => [
                     'message'     => 'success',
@@ -83,7 +83,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $user->two_factor_secret_key = null;
         $user->update();
 
-        if ($request - ajax()) {
+        if ($request -> ajax()) {
             return [
                 'data' => [
                     'message'     => 'success',
