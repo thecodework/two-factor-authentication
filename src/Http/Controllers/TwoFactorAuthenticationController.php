@@ -17,7 +17,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     use AuthenticatesUsersWith2FA;
 
     /**
-     * User Model
+     * User Model.
      */
     protected $userModel;
 
@@ -28,11 +28,13 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     {
         $this->userModel = TwoFactorAuthenticationServiceProvider::getUserModelInstance();
     }
+
     /**
      * Setup two factor authentication.
      *
      * @param \Illuminate\Http\Request
      * @param \Illuminate\Http\Response
+     *
      * @throws \Thecodework\TwoFactorAuthentications\Exceptions\TwoFactorAuthenticationExceptions
      */
     public function setupTwoFactorAuthentication(Request $request)
@@ -72,7 +74,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
-        $user                        = $this->userModel->find($request->user()->id);
+        $user = $this->userModel->find($request->user()->id);
         $user->is_two_factor_enabled = 1;
         $user->update();
 
@@ -97,7 +99,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function disableTwoFactorAuthentication(Request $request)
     {
-        $user                        = $this->userModel->find($request->user()->id);
+        $user = $this->userModel->find($request->user()->id);
         $user->is_two_factor_enabled = 0;
         $user->two_factor_secret_key = null;
         $user->update();
@@ -122,7 +124,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     public function verifyTwoFactorAuthentication(Request $request)
     {
         if ($request->session()->has('2fa:user:id')) {
-            $secret    = getenv('HMAC_SECRET');
+            $secret = getenv('HMAC_SECRET');
             $signature = hash_hmac('sha256', decrypt($request->session()->get('2fa:user:id')), $secret);
 
             if (md5($signature) !== md5($request->signature)) {
@@ -143,7 +145,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function base32EncodedString($length = 30):
-    string {
+    string
+    {
         return Base32::encode($this->strRandom($length));
     }
 
@@ -155,7 +158,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function strRandom($length = 30):
-    string{
+    string
+    {
         $string = '';
 
         while (($len = strlen($string)) < $length) {
