@@ -2,8 +2,8 @@
 
 namespace Thecodework\TwoFactorAuthentication;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\ServiceProvider;
 
 class TwoFactorAuthenticationServiceProvider extends ServiceProvider
 {
@@ -36,7 +36,7 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get User moded defined in config file
+     * Get User moded defined in config file.
      *
      * @return string
      */
@@ -50,8 +50,10 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public static function getUserModelInstance(): Model {
+    public static function getUserModelInstance(): Model
+    {
         $userModelClassName = self::determineUserModel();
+
         return new $userModelClassName();
     }
 }
