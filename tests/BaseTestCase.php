@@ -32,7 +32,7 @@ class BaseTestCase extends TestCase
 
     protected function AddTwoFactorAuthenticationRequiredFields()
     {
-        include_once '__DIR__' . '/../database/migrations/add_two_factor_authentication_required_fields.php';
+        include_once '__DIR__' . '/../database/migrations/2017_01_20_160000_add_two_factor_authentication_required_fields.php';
 
         $this->createUsersTable();
         (new \AddTwoFactorAuthenticationRequiredFields())->up();
