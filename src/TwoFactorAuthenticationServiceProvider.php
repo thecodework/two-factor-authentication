@@ -42,7 +42,7 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
      */
     public static function determineUserModel(): string
     {
-        return $userModel = config('2fa-config.model');
+        return config('2fa-config.model');
     }
 
     /**
