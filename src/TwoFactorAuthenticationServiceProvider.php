@@ -3,6 +3,7 @@
 namespace Thecodework\TwoFactorAuthentication;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Model;
 
 class TwoFactorAuthenticationServiceProvider extends ServiceProvider
 {
@@ -32,5 +33,15 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/views/' => resource_path('views/vendor/2fa'),
         ], 'views');
+    }
+
+    public static function determineUserModel(): string
+    {
+        return $userModel = config('2fa-config.model');
+    }
+
+    public static function getUserModelInstance(): Model {
+        $userModelClassName = self::determineUserModel();
+        return new $userModelClassName();
     }
 }

@@ -6,6 +6,7 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use OTPHP\TOTP;
+use Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider;
 use Validator;
 
 trait AuthenticatesUsersWith2FA
@@ -48,9 +49,10 @@ trait AuthenticatesUsersWith2FA
      */
     public function verifyToken(Request $request)
     {
+        $userModel = TwoFactorAuthenticationServiceProvider::getUserModelInstance();
         // Pulling encrypted user id from session and getting user details
         $userId = $request->session()->get('2fa:user:id');
-        $this->user = User::find(decrypt($userId));
+        $this->user = $userModel->find(decrypt($userId));
 
         // If token is not valid then custom validation error message will be shown.
         $messages = [

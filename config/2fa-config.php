@@ -28,4 +28,15 @@ return [
      * To Support Google Authenticator
      */
     'number_of_digits' => 8,
+
+    /*
+     * Explitcitly Define Table name for the model.
+     */
+    'table' => 'users',
+
+    /*
+     * User Model
+     * By Default `\App\User` Model is defined.
+     */
+    'model' => '\App\User',
 ];

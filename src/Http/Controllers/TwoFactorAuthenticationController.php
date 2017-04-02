@@ -6,23 +6,43 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Base32\Base32;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use OTPHP\TOTP;
 use Thecodework\TwoFactorAuthentication\AuthenticatesUsersWith2FA;
 use Thecodework\TwoFactorAuthentication\Contracts\TwoFactorAuthenticationInterface;
+use Thecodework\TwoFactorAuthentication\Exceptions\TwoFactorAuthenticationExceptions;
+use Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider;
 
 class TwoFactorAuthenticationController extends Controller implements TwoFactorAuthenticationInterface
 {
     use AuthenticatesUsersWith2FA;
 
     /**
+     * User Model
+     */
+    protected $userModel;
+
+    /**
+     * Assigns $usersModel Property a Model instance.
+     */
+    public function __construct()
+    {
+        $this->userModel = TwoFactorAuthenticationServiceProvider::getUserModelInstance();
+    }
+    /**
      * Setup two factor authentication.
      *
      * @param \Illuminate\Http\Request
      * @param \Illuminate\Http\Response
+     * @throws \Thecodework\TwoFactorAuthentications\Exceptions\TwoFactorAuthenticationExceptions
      */
     public function setupTwoFactorAuthentication(Request $request)
     {
-        $user = User::find($request->user()->id);
+        $user = $this->userModel->find($request->user()->id);
+        if (!Schema::hasColumn(config('2fa-config.table'), 'two_factor_secret_key') ||
+            !Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled')) {
+            throw TwoFactorAuthenticationExceptions::columnNotFound();
+        }
         $user->two_factor_secret_key = $user->two_factor_secret_key ?? $this->base32EncodedString(config('2fa-config.number_of_digits'));
         $user->update();
 
@@ -53,7 +73,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
-        $user = User::find($request->user()->id);
+        $user                        = $this->userModel->find($request->user()->id);
         $user->is_two_factor_enabled = 1;
         $user->update();
 
@@ -78,7 +98,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function disableTwoFactorAuthentication(Request $request)
     {
-        $user = User::find($request->user()->id);
+        $user                        = $this->userModel->find($request->user()->id);
         $user->is_two_factor_enabled = 0;
         $user->two_factor_secret_key = null;
         $user->update();
@@ -103,7 +123,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     public function verifyTwoFactorAuthentication(Request $request)
     {
         if ($request->session()->has('2fa:user:id')) {
-            $secret = getenv('HMAC_SECRET');
+            $secret    = getenv('HMAC_SECRET');
             $signature = hash_hmac('sha256', decrypt($request->session()->get('2fa:user:id')), $secret);
 
             if (md5($signature) !== md5($request->signature)) {
@@ -124,8 +144,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function base32EncodedString($length = 30):
-    string
-    {
+    string {
         return Base32::encode($this->strRandom($length));
     }
 
@@ -137,8 +156,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function strRandom($length = 30):
-    string
-    {
+    string{
         $string = '';
 
         while (($len = strlen($string)) < $length) {
