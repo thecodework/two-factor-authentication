@@ -35,11 +35,21 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
         ], 'views');
     }
 
+    /**
+     * Get User moded defined in config file
+     *
+     * @return string
+     */
     public static function determineUserModel(): string
     {
         return $userModel = config('2fa-config.model');
     }
 
+    /**
+     * Get User Model Instance.
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public static function getUserModelInstance(): Model {
         $userModelClassName = self::determineUserModel();
         return new $userModelClassName();

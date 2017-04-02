@@ -2,7 +2,6 @@
 
 namespace Thecodework\TwoFactorAuthentication;
 
-use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use OTPHP\TOTP;
@@ -30,7 +29,7 @@ trait AuthenticatesUsersWith2FA
     {
         if ($user->is_two_factor_enabled) {
             $request->session()->put('2fa:user:id', encrypt($user->id));
-            $secret = getenv('HMAC_SECRET');
+            $secret    = getenv('HMAC_SECRET');
             $signature = hash_hmac('sha256', $user->id, $secret);
             Auth::logout();
 
@@ -51,7 +50,7 @@ trait AuthenticatesUsersWith2FA
     {
         $userModel = TwoFactorAuthenticationServiceProvider::getUserModelInstance();
         // Pulling encrypted user id from session and getting user details
-        $userId = $request->session()->get('2fa:user:id');
+        $userId     = $request->session()->get('2fa:user:id');
         $this->user = $userModel->find(decrypt($userId));
 
         // If token is not valid then custom validation error message will be shown.
@@ -74,7 +73,7 @@ trait AuthenticatesUsersWith2FA
             'totp_token' => 'required|digits:6|valid_token',
         ], $messages);
 
-        $secret = getenv('HMAC_SECRET');
+        $secret    = getenv('HMAC_SECRET');
         $signature = hash_hmac('sha256', $this->user->id, $secret);
         if ($validator->fails()) {
             return redirect('verify-2fa?signature=' . $signature)

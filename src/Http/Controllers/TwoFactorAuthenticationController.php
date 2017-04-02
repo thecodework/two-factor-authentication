@@ -3,7 +3,6 @@
 namespace Thecodework\TwoFactorAuthentication\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\User;
 use Base32\Base32;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
