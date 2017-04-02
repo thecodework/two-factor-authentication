@@ -60,7 +60,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         if ($request->ajax()) {
             return [
                 'data' => [
-                    'message' => 'success',
+                    'message'     => 'success',
                     'description' => '2FA Enabled',
                 ],
             ];
@@ -86,7 +86,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         if ($request->ajax()) {
             return [
                 'data' => [
-                    'message' => 'success',
+                    'message'     => 'success',
                     'description' => '2FA Disabled',
                 ],
             ];
@@ -124,7 +124,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function base32EncodedString($length = 30):
-    string {
+    string
+    {
         return Base32::encode($this->strRandom($length));
     }
 
@@ -136,7 +137,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function strRandom($length = 30):
-    string{
+    string
+    {
         $string = '';
 
         while (($len = strlen($string)) < $length) {
