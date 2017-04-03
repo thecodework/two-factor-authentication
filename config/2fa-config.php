@@ -24,10 +24,13 @@ return [
     'digest_algorithm' => 'sha1',
 
     /*
-     * Number of digits can be max 30
-     * To Support Google Authenticator
+     * Size of Base32 encoded secret key.
+     * Default 10.
+     * Note. Keeping Secret key in multiple of
+     * 5 would result secret key not padded
+     * with equal to symbols.
      */
-    'number_of_digits' => 8,
+    'number_of_digits' => 10,
 
     /*
      * Explitcitly Define Table name for the model.
