@@ -13,8 +13,8 @@ return [
      * Change the routes if your existing routes
      * conflicts with existing routes.
      */
-    'setup_2fa' => 'setup-2fa',
-    'enable_2fa' => 'enable-2fa',
+    'setup_2fa'   => 'setup-2fa',
+    'enable_2fa'  => 'enable-2fa',
     'disable_2fa' => 'disable-2fa',
 
     /*
