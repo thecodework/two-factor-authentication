@@ -50,7 +50,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $totp = new TOTP(
             config('2fa-config.account_name'),
             $user->two_factor_secret_key,
-            10,
+            config('2fa-config.period'),
             config('2fa-config.digest_algorithm'),
             config('2fa-config.number_of_digits')
         );
