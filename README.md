@@ -12,7 +12,7 @@ Two Factor Authentication is an extra security layer for your application. Two F
   - Laravel >= 5.3
   - Google Authenticator [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en) - [iOS](https://itunes.apple.com/in/app/google-authenticator/id388497605?mt=8) (Recommended) or [Authy](https://www.authy.com/) mobile app
 
-Note: Current implementation is buggy using Authy as Google Authenticator uses SHA-1 with 128-bit keys whereas Authy uses SHA-2 with 256-bit keys. SHA-2 with 256-bit key is coming in verion `0.1.0`.
+Note: Current implementation is buggy using Authy as Google Authenticator uses SHA-1 with 128-bit keys whereas Authy uses SHA-2 with 256-bit keys. SHA-2 with 256-bit key is coming in verion `0.1.0`. But if wish to use Authy as well as Google Authenticator I'd suggest to go with default setting of `period`, `number_of_digits` and `algorithm`.
 
 ## Installation
 **1. Composer Install**
