@@ -40,7 +40,7 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
      *
      * @return string
      */
-    public static function determineUserModel(): string
+    public static function determineTwoFAModel(): string
     {
         return config('2fa-config.model');
     }
@@ -50,10 +50,10 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public static function getUserModelInstance(): Model
+    public static function getTwoFAModelInstance(): Model
     {
-        $userModelClassName = self::determineUserModel();
+        $TwoFAModelClassName = self::determineTwoFAModel();
 
-        return new $userModelClassName();
+        return new $TwoFAModelClassName();
     }
 }

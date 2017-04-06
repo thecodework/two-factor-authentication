@@ -19,14 +19,19 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     /**
      * User Model.
      */
-    protected $userModel;
+    protected $TwoFAModel;
 
     /**
      * Assigns $usersModel Property a Model instance.
      */
     public function __construct()
     {
-        $this->userModel = TwoFactorAuthenticationServiceProvider::getUserModelInstance();
+        $this->TwoFAModel = TwoFactorAuthenticationServiceProvider::getTwoFAModelInstance();
+
+        $this->middleware(function ($request, $next) {
+            $this->setUser(auth()->user());
+            return $next($request);
+        });
     }
 
     /**
@@ -39,14 +44,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function setupTwoFactorAuthentication(Request $request)
     {
-        $user = $this->userModel->find($request->user()->id);
-        if (!Schema::hasColumn(config('2fa-config.table'), 'two_factor_secret_key') ||
-            !Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled')) {
-            throw TwoFactorAuthenticationExceptions::columnNotFound();
-        }
-        $user->two_factor_secret_key = $user->two_factor_secret_key ?? $this->base32EncodedString(config('2fa-config.number_of_digits'));
-        $user->update();
-
+        $this->updateUserWith2FAGeneratedKey();
+        $user = $this->getUser();
         $totp = new TOTP(
             config('2fa-config.account_name'),
             $user->two_factor_secret_key,
@@ -74,7 +73,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
-        $user = $this->userModel->find($request->user()->id);
+        $user = $this->TwoFAModel->find($request->user()->id);
         $user->is_two_factor_enabled = 1;
         $user->update();
 
@@ -99,7 +98,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function disableTwoFactorAuthentication(Request $request)
     {
-        $user = $this->userModel->find($request->user()->id);
+        $user = $this->TwoFAModel->find($request->user()->id);
         $user->is_two_factor_enabled = 0;
         $user->two_factor_secret_key = null;
         $user->update();
@@ -134,7 +133,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             return view('2fa::verify');
         }
 
-        return redirect()->back(); //shoud be configurabel
+        return redirect()->back(); //shoud be configurable
     }
 
     /**
@@ -171,5 +170,16 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         }
 
         return $string;
+    }
+
+    private function updateUserWith2FAGeneratedKey()
+    {
+        $user = $this->TwoFAModel->find($this->getUser()->id);
+        if (!Schema::hasColumn(config('2fa-config.table'), 'two_factor_secret_key') ||
+            !Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled')) {
+            throw TwoFactorAuthenticationExceptions::columnNotFound();
+        }
+        $user->two_factor_secret_key = $user->two_factor_secret_key ?? $this->base32EncodedString(config('2fa-config.number_of_digits'));
+        $user->update();
     }
 }

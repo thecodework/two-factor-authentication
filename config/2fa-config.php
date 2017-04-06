@@ -11,7 +11,8 @@ return [
     /*
      * Routes
      * Change the routes if your existing routes
-     * conflicts with existing routes.
+     * conflicts with existing routes. or for
+     * any customization.
      */
     'setup_2fa'   => 'setup-2fa',
     'enable_2fa'  => 'enable-2fa',

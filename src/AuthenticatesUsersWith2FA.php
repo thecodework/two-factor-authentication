@@ -47,10 +47,10 @@ trait AuthenticatesUsersWith2FA
      */
     public function verifyToken(Request $request)
     {
-        $userModel = TwoFactorAuthenticationServiceProvider::getUserModelInstance();
+        $TwoFAModel = TwoFactorAuthenticationServiceProvider::getTwoFAModelInstance();
         // Pulling encrypted user id from session and getting user details
         $userId = $request->session()->get('2fa:user:id');
-        $this->user = $userModel->find(decrypt($userId));
+        $this->user = $TwoFAModel->find(decrypt($userId));
 
         // If token is not valid then custom validation error message will be shown.
         $messages = [
@@ -86,5 +86,15 @@ trait AuthenticatesUsersWith2FA
         Auth::loginUsingId($this->user->id);
 
         return redirect()->intended(config('2fa-config.redirect_to'));
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
     }
 }
