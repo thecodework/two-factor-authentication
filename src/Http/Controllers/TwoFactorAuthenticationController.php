@@ -30,6 +30,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
 
         $this->middleware(function ($request, $next) {
             $this->setUser(auth()->user());
+
             return $next($request);
         });
     }
