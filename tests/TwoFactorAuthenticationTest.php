@@ -2,22 +2,24 @@
 
 namespace Thecodework\TwoFactorAuthentication\Tests;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
+use Thecodework\TwoFactorAuthentication\Http\Controllers\TwoFactorAuthenticationController;
+
 class TwoFactorAuthenticationTest extends BaseTestCase
 {
-    /**
-     * Test Users count after inserting one row.
-     *
-     * @test
-     */
-    public function getUsers()
+    protected $user;
+
+    public function testUserId()
     {
-        $this->assertEquals(\DB::table('users')->count(), 1);
+        $this->user = \DB::table('users')->first();
+        $this->assertEquals(1, $this->user->id);
     }
 
-    protected function getPackageProviders($app)
+    public function testIfColumnExists()
     {
-        return [
-            'Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider',
-        ];
+        $this->assertTrue(Schema::hasColumn(config('2fa-config.table'), 'two_factor_secret_key'));
+        $this->assertTrue(Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled'));
     }
+
 }

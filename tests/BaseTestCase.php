@@ -14,12 +14,12 @@ class BaseTestCase extends TestCase
         $this->setUpDatabase();
     }
 
-    // protected function getPackageProviders($app)
-    // {
-    //     return [
-    //         \Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider::class,
-    //     ];
-    // }
+    protected function getPackageProviders($app)
+    {
+        return [
+            \Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider::class,
+        ];
+    }
 
     protected function seedUserDetails()
     {
