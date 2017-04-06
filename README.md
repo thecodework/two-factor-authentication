@@ -34,7 +34,15 @@ After requiring the package add `TwoFactorAuthenticationServiceProvider::class` 
 ]
 ```
 
-**3. Run Migrations**
+**3. Publish the ConfigFile**
+
+Publish config file
+```
+$ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider" --tag=config
+```
+Once the config file is published you can navigate to config directory of your application and look for `2fa-config.php` file and change configuration as you want.
+
+**4. Run Migrations**
 
 Now run the migration
 ```bash
@@ -42,7 +50,7 @@ $ php artisan migrate
 ```
 It will use the default User model and adds two columns `is_2fa_enabled` and `secret_key`.
 
-**4. Add `AuthenticatesUserWith2FA` trait in the LoginController**
+**5. Add `AuthenticatesUserWith2FA` trait in the LoginController**
 
 Now the config file is placed. The last thing to do is addding `AuthenticatesUsersWith2FA` trait in the  `Http/Controllers/Auth/LoginController.php` file which helps to stop user at verify-2fa page to enter TOTP token after each login.
 
@@ -53,14 +61,6 @@ use AuthenticatesUsers, AuthenticatesUsersWith2FA {
 }
 ```
 Note: Don't forget to include use statement `use Thecodework\TwoFactorAuthentication\AuthenticatesUsersWith2FA` in the header.
-
-**5. Publish the ConfigFile**
-
-Finally publish config file
-```
-$ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider" --tag=config
-```
-Once the config file is published you can navigate to config directory of your application and look for `2fa-config.php` file and change configuration as you want.
 
 **6. Setup 2FA for user**
 
