@@ -43,6 +43,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @param \Illuminate\Http\Response
      *
      * @throws \Thecodework\TwoFactorAuthentications\Exceptions\TwoFactorAuthenticationExceptions
+     *
      * @return mixed
      */
     public function setupTwoFactorAuthentication(Request $request)
@@ -70,6 +71,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * Disable 2FA.
      *
      * @param \Illuminate\Http\Request
+     *
      * @return mixed
      */
     public function enableTwoFactorAuthentication(Request $request)
