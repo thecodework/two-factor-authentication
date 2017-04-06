@@ -23,6 +23,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
 
     /**
      * Assigns $usersModel Property a Model instance.
+     * Set authenticated users data to $user Property.
      */
     public function __construct()
     {
@@ -42,6 +43,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @param \Illuminate\Http\Response
      *
      * @throws \Thecodework\TwoFactorAuthentications\Exceptions\TwoFactorAuthenticationExceptions
+     * @return mixed
      */
     public function setupTwoFactorAuthentication(Request $request)
     {
@@ -57,7 +59,6 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
 
         $barcode = $totp->getQrCodeUri();
 
-        // Return Barcode image if ajax Request
         if ($request->ajax()) {
             return $barcode;
         }
@@ -69,12 +70,11 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * Disable 2FA.
      *
      * @param \Illuminate\Http\Request
-     *
      * @return mixed
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
-        $user = $this->TwoFAModel->find($request->user()->id);
+        $user = $this->getUser();
         $user->is_two_factor_enabled = 1;
         $user->update();
 
@@ -99,7 +99,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function disableTwoFactorAuthentication(Request $request)
     {
-        $user = $this->TwoFAModel->find($request->user()->id);
+        $user = $this->getUser();
         $user->is_two_factor_enabled = 0;
         $user->two_factor_secret_key = null;
         $user->update();
