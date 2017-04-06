@@ -2,9 +2,7 @@
 
 namespace Thecodework\TwoFactorAuthentication\Tests;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use Thecodework\TwoFactorAuthentication\Http\Controllers\TwoFactorAuthenticationController;
 
 class TwoFactorAuthenticationTest extends BaseTestCase
 {
@@ -21,5 +19,4 @@ class TwoFactorAuthenticationTest extends BaseTestCase
         $this->assertTrue(Schema::hasColumn(config('2fa-config.table'), 'two_factor_secret_key'));
         $this->assertTrue(Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled'));
     }
-
 }
