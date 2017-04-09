@@ -55,7 +55,7 @@ trait AuthenticatesUsersWith2FA
         // If token is not valid then custom validation error message will be shown.
         $messages = [
             'totp_token.valid_token' => 'Security code is not valid',
-            'totp_token.required' => 'Security code is required'
+            'totp_token.required'    => 'Security code is required',
         ];
 
         // Impllicitly adding an validation rule to check if token is valid or not.
