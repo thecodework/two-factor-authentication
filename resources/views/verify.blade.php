@@ -8,7 +8,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/verify-2fa') }}">
                         {{ csrf_field() }}
-                        <div class="alert alert-warning text-center">Download the <strong>Google Authenticator</strong> App on your phone from the Play Store or the App Store.</div><br/>
+                        <div class="alert alert-warning">Download the <strong>Google Authenticator</strong> App on your phone from the Play Store or the App Store.</div><br/>
                         <div class="form-group{{ $errors->has('totp_token') ? ' has-error' : '' }}">
                             <label for="totp_token" class="col-md-4 control-label">TOTP Token</label>
                             <div class="col-md-6 pincode-input-container">

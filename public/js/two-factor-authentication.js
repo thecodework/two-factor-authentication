@@ -73,6 +73,7 @@
 // import jquery from 'jquery'
 // require('jquery')
 __webpack_require__(1);
+__webpack_require__(8);
 __webpack_require__(6);
 
 // global.$ = global.jQuery = require('jquery');
@@ -89,7 +90,7 @@ window.$('#totp_token').pincodeInput({
   inputs: 6,
 
   // hide digits like password input
-  hideDigits: false,
+  hideDigits: true,
 
   // keyDown callback
   keydown: function keydown(e) {},
@@ -101,8 +102,8 @@ window.$('#totp_token').pincodeInput({
     // errorElement = error span next to to this, fill with html
     // e.g. : $(errorElement).html("Code not correct");
   }
-
 });
+$('input.pincode-input-text').numericInput().eq(0).focus();
 
 /***/ }),
 /* 1 */
@@ -10989,6 +10990,50 @@ if(false) {
 
 module.exports = __webpack_require__(0);
 
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+window.$ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
+window.jquery = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;(function ($) {
+    $.fn.numericInput = function () {
+        $(this).on('keydown', function (e) {
+            if (isNumericKeyEvent(e)) {
+                return true;
+            }
+
+            e.preventDefault();
+        });
+
+        return this;
+    };
+})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a);
+
+window.isNumericKeyEvent = function (e) {
+    // Allow: backspace, delete, tab, and escape
+    if (__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.inArray(e.keyCode, [46, 8, 9, 27]) !== -1 ||
+    // Allow: Ctrl+A, Command+A
+    e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true) ||
+    // Allow: Ctrl+R, Command+R
+    e.keyCode === 82 && (e.ctrlKey === true || e.metaKey === true) ||
+    // Allow: home, end, left, right, down, up
+    e.keyCode >= 35 && e.keyCode <= 40) {
+        // let it happen, don't do anything
+        return true;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105)) {
+        return false;
+    }
+
+    return true;
+};
 
 /***/ })
 /******/ ]);

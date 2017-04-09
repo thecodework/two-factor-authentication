@@ -1,6 +1,7 @@
 // import jquery from 'jquery'
 // require('jquery')
 require('./pincode-input.js')
+require('./numeric-input.js')
 require('./../css/pincode-input.css')
 
 // global.$ = global.jQuery = require('jquery');
@@ -17,7 +18,7 @@ window.$('#totp_token').pincodeInput({
   inputs:6,
 
   // hide digits like password input
-  hideDigits:false,
+  hideDigits:true,
 
   // keyDown callback
   keydown : function(e){},
@@ -29,5 +30,5 @@ window.$('#totp_token').pincodeInput({
     // errorElement = error span next to to this, fill with html
     // e.g. : $(errorElement).html("Code not correct");
   }
-
 });
+$('input.pincode-input-text').numericInput().eq(0).focus()
