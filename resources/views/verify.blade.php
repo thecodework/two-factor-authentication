@@ -34,30 +34,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="{{asset('js/two-factor-authentication.js')}}"></script>
-{{-- <style>
-    .pincode-input-container {
-    display:inline-block;
-}
-.pincode-input-container input.first {
-    border-top-right-radius:0px;
-    border-bottom-right-radius:0px;
-}
-.pincode-input-container input.last {
-    border-top-left-radius:0px;
-    border-bottom-left-radius:0px;
-    border-left-width:0px;
-}
-.pincode-input-container input.mid {
-    border-radius:0px;
-    border-left-width:0px;
-}
-.pincode-input-text, .form-control.pincode-input-text {
-    width:35px;
-    float:left;
-}
-.pincode-input-error{
-    clear:both;
-}
-</style> --}}
 @endsection
