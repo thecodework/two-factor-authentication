@@ -34,10 +34,6 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/views/' => resource_path('views/vendor/2fa'),
         ], 'views');
 
-        // Publishing assets
-        $this->publishes([
-            __DIR__ . '/../public/js/' => public_path('js'),
-        ]);
     }
 
     /**
