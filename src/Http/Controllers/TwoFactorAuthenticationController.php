@@ -143,6 +143,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * Encode Random String to 32 Base Transfer Encoding.
      *
      * @param int $length Length of the encoded string.
+     *
      * @return string
      */
     private function base32EncodedString($length = 30):
@@ -155,6 +156,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * Generate a more truly "random" alpha-numeric string.
      *
      * @param int $length
+     *
      * @return string
      */
     private function strRandom($length = 30):
@@ -174,7 +176,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     }
 
     /**
-     * Update User data with 2FA generated Key
+     * Update User data with 2FA generated Key.
      *
      * @return void
      */
