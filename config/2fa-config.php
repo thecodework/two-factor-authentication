@@ -25,6 +25,13 @@ return [
     'account_name' => 'Thecodework 2FA',
 
     /*
+     * Set Gurad for 2FA
+     * By defauly the `web` gurad will be used but you
+     * can define any custom gurad to utilize 2FA.
+     */
+    'guard' => 'web',
+
+    /*
      * Currntly Support 'Sha1'
      * The library works with the Google Authenticator application
      * for iPhone and Android. Google only supports SHA-1 digest algorithm,

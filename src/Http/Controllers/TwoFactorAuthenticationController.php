@@ -30,7 +30,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $this->TwoFAModel = TwoFactorAuthenticationServiceProvider::getTwoFAModelInstance();
 
         $this->middleware(function ($request, $next) {
-            $this->setUser(auth()->user());
+            $this->setUser(\Auth::guard(config('2fa-config.guard'))->user());
 
             return $next($request);
         });
@@ -143,7 +143,6 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * Encode Random String to 32 Base Transfer Encoding.
      *
      * @param int $length Length of the encoded string.
-     *
      * @return string
      */
     private function base32EncodedString($length = 30):
@@ -156,7 +155,6 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * Generate a more truly "random" alpha-numeric string.
      *
      * @param int $length
-     *
      * @return string
      */
     private function strRandom($length = 30):
@@ -175,6 +173,11 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         return $string;
     }
 
+    /**
+     * Update User data with 2FA generated Key
+     *
+     * @return void
+     */
     private function updateUserWith2FAGeneratedKey()
     {
         $user = $this->TwoFAModel->find($this->getUser()->id);
