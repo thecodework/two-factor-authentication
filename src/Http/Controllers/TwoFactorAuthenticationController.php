@@ -2,8 +2,7 @@
 
 namespace Thecodework\TwoFactorAuthentication\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Base32\Base32;
+use ParagonIE\ConstantTime\Base32;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use OTPHP\TOTP;
@@ -48,18 +47,18 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function setupTwoFactorAuthentication(Request $request)
     {
-        $this->updateUserWith2FAGeneratedKey();
+        // $this->updateUserWith2FAGeneratedKey();
         $user = $this->getUser();
-        $totp = new TOTP(
-            config('2fa-config.account_name'),
-            $user->two_factor_secret_key,
+        $totp = TOTP::create(
+            $this->base32EncodedString(),
             config('2fa-config.period'),
             config('2fa-config.digest_algorithm'),
             config('2fa-config.number_of_digits')
         );
-
+        $totp->setLabel(config('2fa-config.account_name'));
+        $this->updateUserWithProvisionedUri($totp->getProvisioningUri());
         $barcode = $totp->getQrCodeUri();
-
+        // info($totp->getProvisioningUri());
         if ($request->ajax()) {
             return $barcode;
         }
@@ -146,33 +145,10 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      *
      * @return string
      */
-    private function base32EncodedString($length = 30):
+    private function base32EncodedString():
     string
     {
-        return Base32::encode($this->strRandom($length));
-    }
-
-    /**
-     * Generate a more truly "random" alpha-numeric string.
-     *
-     * @param int $length
-     *
-     * @return string
-     */
-    private function strRandom($length = 30):
-    string
-    {
-        $string = '';
-
-        while (($len = strlen($string)) < $length) {
-            $size = $length - $len;
-
-            $bytes = random_bytes($size);
-
-            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
-        }
-
-        return $string;
+        return trim(Base32::encodeUpper(random_bytes(128)), '=');
     }
 
     /**
@@ -180,14 +156,14 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      *
      * @return void
      */
-    private function updateUserWith2FAGeneratedKey()
+    private function updateUserWithProvisionedUri($twoFactorProvisionedUri)
     {
         $user = $this->TwoFAModel->find($this->getUser()->id);
-        if (!Schema::hasColumn(config('2fa-config.table'), 'two_factor_secret_key') ||
+        if (!Schema::hasColumn(config('2fa-config.table'), 'two_factor_provisioned_uri') ||
             !Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled')) {
             throw TwoFactorAuthenticationExceptions::columnNotFound();
         }
-        $user->two_factor_secret_key = $user->two_factor_secret_key ?? $this->base32EncodedString(config('2fa-config.number_of_digits'));
+        $user->two_factor_provisioned_uri = $twoFactorProvisionedUri;
         $user->update();
     }
 }

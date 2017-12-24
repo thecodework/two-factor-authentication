@@ -4,6 +4,7 @@ namespace Thecodework\TwoFactorAuthentication;
 
 use Auth;
 use Illuminate\Http\Request;
+use OTPHP\Factory;
 use OTPHP\TOTP;
 use Validator;
 
@@ -60,17 +61,14 @@ trait AuthenticatesUsersWith2FA
 
         // Impllicitly adding an validation rule to check if token is valid or not.
         Validator::extendImplicit('valid_token', function ($attribute, $value) {
-            $totp = new TOTP(
-                config('2fa-config.account_name'),
-                $this->user->two_factor_secret_key
-            );
-
-            return $value == $totp->now();
+            $totp = Factory::loadFromProvisioningUri($this->user->two_factor_provisioned_uri);
+            return $totp->verify($value);
         });
 
         // If Validation fails, it will return the error else sign in the user.
+        $number_of_digits = config('2fa-config.number_of_digits');
         $validator = Validator::make($request->all(), [
-            'totp_token' => 'required|digits:6|valid_token',
+            'totp_token' => "required|digits:$number_of_digits|valid_token",
         ], $messages);
 
         $secret = getenv('HMAC_SECRET');
