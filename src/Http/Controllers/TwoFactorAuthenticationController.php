@@ -73,7 +73,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
-        $user                        = $this->getUser();
+        $user = $this->getUser();
         $user->is_two_factor_enabled = 1;
         $user->update();
 
@@ -98,7 +98,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function disableTwoFactorAuthentication(Request $request)
     {
-        $user                        = $this->getUser();
+        $user = $this->getUser();
         $user->is_two_factor_enabled = 0;
         $user->two_factor_secret_key = null;
         $user->update();
@@ -123,7 +123,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     public function verifyTwoFactorAuthentication(Request $request)
     {
         if ($request->session()->has('2fa:user:id')) {
-            $secret    = getenv('HMAC_SECRET');
+            $secret = getenv('HMAC_SECRET');
             $signature = hash_hmac('sha256', decrypt($request->session()->get('2fa:user:id')), $secret);
 
             if (md5($signature) !== md5($request->signature)) {
@@ -142,7 +142,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      * @return string
      */
     private function base32EncodedString():
-    string {
+    string
+    {
         return trim(Base32::encodeUpper(random_bytes(128)), '=');
     }
 

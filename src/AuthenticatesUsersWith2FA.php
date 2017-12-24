@@ -62,6 +62,7 @@ trait AuthenticatesUsersWith2FA
         // Impllicitly adding an validation rule to check if token is valid or not.
         Validator::extendImplicit('valid_token', function ($attribute, $value) {
             $totp = Factory::loadFromProvisioningUri($this->user->two_factor_provisioned_uri);
+
             return $totp->verify($value);
         });
 
