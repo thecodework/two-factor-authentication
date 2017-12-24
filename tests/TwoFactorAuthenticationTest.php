@@ -16,7 +16,7 @@ class TwoFactorAuthenticationTest extends BaseTestCase
 
     public function testIfColumnExists()
     {
-        $this->assertTrue(Schema::hasColumn(config('2fa-config.table'), 'two_factor_secret_key'));
+        $this->assertTrue(Schema::hasColumn(config('2fa-config.table'), 'two_factor_provisioned_uri'));
         $this->assertTrue(Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled'));
     }
 }
