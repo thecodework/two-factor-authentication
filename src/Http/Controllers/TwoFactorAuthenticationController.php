@@ -2,10 +2,10 @@
 
 namespace Thecodework\TwoFactorAuthentication\Http\Controllers;
 
-use ParagonIE\ConstantTime\Base32;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use OTPHP\TOTP;
+use ParagonIE\ConstantTime\Base32;
 use Thecodework\TwoFactorAuthentication\AuthenticatesUsersWith2FA;
 use Thecodework\TwoFactorAuthentication\Contracts\TwoFactorAuthenticationInterface;
 use Thecodework\TwoFactorAuthentication\Exceptions\TwoFactorAuthenticationExceptions;
@@ -47,7 +47,6 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function setupTwoFactorAuthentication(Request $request)
     {
-        // $this->updateUserWith2FAGeneratedKey();
         $user = $this->getUser();
         $totp = TOTP::create(
             $this->base32EncodedString(),
@@ -58,7 +57,6 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $totp->setLabel(config('2fa-config.account_name'));
         $this->updateUserWithProvisionedUri($totp->getProvisioningUri());
         $barcode = $totp->getQrCodeUri();
-        // info($totp->getProvisioningUri());
         if ($request->ajax()) {
             return $barcode;
         }
@@ -75,7 +73,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
-        $user = $this->getUser();
+        $user                        = $this->getUser();
         $user->is_two_factor_enabled = 1;
         $user->update();
 
@@ -100,7 +98,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function disableTwoFactorAuthentication(Request $request)
     {
-        $user = $this->getUser();
+        $user                        = $this->getUser();
         $user->is_two_factor_enabled = 0;
         $user->two_factor_secret_key = null;
         $user->update();
@@ -125,7 +123,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     public function verifyTwoFactorAuthentication(Request $request)
     {
         if ($request->session()->has('2fa:user:id')) {
-            $secret = getenv('HMAC_SECRET');
+            $secret    = getenv('HMAC_SECRET');
             $signature = hash_hmac('sha256', decrypt($request->session()->get('2fa:user:id')), $secret);
 
             if (md5($signature) !== md5($request->signature)) {
@@ -141,13 +139,10 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     /**
      * Encode Random String to 32 Base Transfer Encoding.
      *
-     * @param int $length Length of the encoded string.
-     *
      * @return string
      */
     private function base32EncodedString():
-    string
-    {
+    string {
         return trim(Base32::encodeUpper(random_bytes(128)), '=');
     }
 
