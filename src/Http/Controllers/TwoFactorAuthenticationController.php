@@ -100,7 +100,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     {
         $user = $this->getUser();
         $user->is_two_factor_enabled = 0;
-        $user->two_factor_secret_key = null;
+        $user->two_factor_provisioned_uri = null;
         $user->update();
 
         if ($request->ajax()) {
