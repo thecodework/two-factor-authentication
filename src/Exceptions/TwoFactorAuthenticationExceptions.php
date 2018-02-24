@@ -11,6 +11,6 @@ class TwoFactorAuthenticationExceptions extends \Exception
     {
         $table = config('2fa-config.table');
 
-        return new static("Could not locate required column `two_factor_secret_key` or `is_two_factor_enabled` in `$table` table. Make sure the migrations ran properly.");
+        return new static("Could not locate required column `two_factor_provisioned_uri` or `is_two_factor_enabled` in `$table` table. Make sure the migrations ran properly.");
     }
 }
