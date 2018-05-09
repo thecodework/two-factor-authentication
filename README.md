@@ -86,6 +86,3 @@ $ php artisan vendor:publish --provider="Thecodework\TwoFactorAuthentication\Two
 
 ## Contribution
 Feel free to create issues, submit PRs and talk about features and enhancement through proposing issue. If you find any security consideration, instead of creating an issue send an email to [imrealashu@gmail.com](mailto:imrealashu@gmail.com).
-
-
-<a href="http://s05.flagcounter.com/more/Gjy"><img src="http://s05.flagcounter.com/count2/Gjy/bg_FFFFFF/txt_000000/border_FFFFFF/columns_8/maxflags_8/viewers_3/labels_1/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
