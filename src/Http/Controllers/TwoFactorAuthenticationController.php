@@ -86,7 +86,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             ];
         }
 
-        return redirect('home');
+        return redirect(config('2fa-config.redirect_to'));
     }
 
     /**
@@ -112,7 +112,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             ];
         }
 
-        return redirect('home');
+        return redirect(config('2fa-config.redirect_to'));
     }
 
     /**
