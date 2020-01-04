@@ -4,7 +4,7 @@ return [
 
     /*
      * Specify redirect url after when token authentication
-     * is successfull.
+     * is successful.
      */
     'redirect_to' => '/home',
 
@@ -14,8 +14,8 @@ return [
      * conflicts with existing routes. or for
      * any customization.
      */
-    'setup_2fa'   => 'setup-2fa',
-    'enable_2fa'  => 'enable-2fa',
+    'setup_2fa' => 'setup-2fa',
+    'enable_2fa' => 'enable-2fa',
     'disable_2fa' => 'disable-2fa',
 
     /*
@@ -25,14 +25,14 @@ return [
     'account_name' => 'Thecodework 2FA',
 
     /*
-     * Set Gurad for 2FA
-     * By defauly the `web` gurad will be used but you
-     * can define any custom gurad to utilize 2FA.
+     * Set Guard for 2FA
+     * By default the `web` guard will be used but you
+     * can define any custom guard to utilize 2FA.
      */
     'guard' => 'web',
 
     /*
-     * Currntly Support 'Sha1'
+     * Currently Support 'Sha1'
      * The library works with the Google Authenticator application
      * for iPhone and Android. Google only supports SHA-1 digest algorithm,
      * 30 second period and 6 digits OTP. Other values for these parameters
@@ -53,7 +53,7 @@ return [
     'period' => 30,
 
     /*
-     * Explitcitly Define Table name for the model.
+     * Explicitly Define Table name for the model.
      */
     'table' => 'users',
 
