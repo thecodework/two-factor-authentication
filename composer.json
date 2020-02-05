@@ -19,9 +19,9 @@
     ],
     "require": {
         "php": ">=7.1",
-        "spomky-Labs/otphp": "^9.0",
+        "spomky-labs/otphp": "^9.0",
         "paragonie/constant_time_encoding": "^2.0",
-        "endroid/qr-code": "^3.5"
+        "endroid/qr-code": "3.5"
     },
     "autoload": {
         "psr-4": {
