@@ -14,8 +14,8 @@ return [
      * conflicts with existing routes. or for
      * any customization.
      */
-    'setup_2fa' => 'setup-2fa',
-    'enable_2fa' => 'enable-2fa',
+    'setup_2fa'   => 'setup-2fa',
+    'enable_2fa'  => 'enable-2fa',
     'disable_2fa' => 'disable-2fa',
 
     /*
