@@ -10,6 +10,7 @@ use Thecodework\TwoFactorAuthentication\AuthenticatesUsersWith2FA;
 use Thecodework\TwoFactorAuthentication\Contracts\TwoFactorAuthenticationInterface;
 use Thecodework\TwoFactorAuthentication\Exceptions\TwoFactorAuthenticationExceptions;
 use Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider;
+use Endroid\QrCode\QrCode;
 
 class TwoFactorAuthenticationController extends Controller implements TwoFactorAuthenticationInterface
 {
@@ -56,7 +57,10 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         );
         $totp->setLabel(config('2fa-config.account_name'));
         $this->updateUserWithProvisionedUri($totp->getProvisioningUri());
-        $barcode = $totp->getQrCodeUri();
+        
+        $qrCode  = new QrCode($totp->getProvisioningUri());
+        $barcode = $qrCode->writeDataUri();
+        
         if ($request->ajax()) {
             return $barcode;
         }
@@ -86,7 +90,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             ];
         }
 
-        return redirect('home');
+        return redirect(config('2fa-config.redirect_to'));
     }
 
     /**
@@ -112,7 +116,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             ];
         }
 
-        return redirect('home');
+        return redirect(config('2fa-config.redirect_to'));
     }
 
     /**
