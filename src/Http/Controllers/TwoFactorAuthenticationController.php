@@ -2,6 +2,7 @@
 
 namespace Thecodework\TwoFactorAuthentication\Http\Controllers;
 
+use Endroid\QrCode\QrCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use OTPHP\TOTP;
@@ -10,7 +11,6 @@ use Thecodework\TwoFactorAuthentication\AuthenticatesUsersWith2FA;
 use Thecodework\TwoFactorAuthentication\Contracts\TwoFactorAuthenticationInterface;
 use Thecodework\TwoFactorAuthentication\Exceptions\TwoFactorAuthenticationExceptions;
 use Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider;
-use Endroid\QrCode\QrCode;
 
 class TwoFactorAuthenticationController extends Controller implements TwoFactorAuthenticationInterface
 {
@@ -58,7 +58,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         $totp->setLabel(config('2fa-config.account_name'));
         $this->updateUserWithProvisionedUri($totp->getProvisioningUri());
 
-        $qrCode  = new QrCode($totp->getProvisioningUri());
+        $qrCode = new QrCode($totp->getProvisioningUri());
         $barcode = $qrCode->writeDataUri();
 
         if ($request->ajax()) {
@@ -145,8 +145,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      *
      * @return string
      */
-    private function base32EncodedString():
-    string
+    private function base32EncodedString(): string
     {
         return trim(Base32::encodeUpper(random_bytes(128)), '=');
     }
