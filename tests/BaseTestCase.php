@@ -8,7 +8,7 @@ use Orchestra\Testbench\TestCase;
 
 class BaseTestCase extends TestCase
 {
-    public function setup()
+    public function setup() : void
     {
         parent::setUp();
         $this->setUpDatabase();
