@@ -57,10 +57,10 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
         );
         $totp->setLabel(config('2fa-config.account_name'));
         $this->updateUserWithProvisionedUri($totp->getProvisioningUri());
-        
+
         $qrCode  = new QrCode($totp->getProvisioningUri());
         $barcode = $qrCode->writeDataUri();
-        
+
         if ($request->ajax()) {
             return $barcode;
         }

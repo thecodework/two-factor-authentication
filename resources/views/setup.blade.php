@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="row row d-flex justify-content-center">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">Verify Two Factor Authentication </div>
                 <div class="panel-body">
@@ -23,7 +23,7 @@
                         @endif
                         </div>
                         <div class="form-group text-center">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="text-center">
                             @if($user->is_two_factor_enabled)
                                 <button type="submit" class="btn btn-danger">
                                     Disable Two Factor Authentication
