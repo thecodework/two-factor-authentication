@@ -22,17 +22,17 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
         // Publishing configuration file
         $this->publishes([
             __DIR__ . '/../config/2fa-config.php' => config_path('2fa-config.php'),
-        ], 'config');
+        ], '2fa-config');
 
         // Publishing migration
         $this->publishes([
             __DIR__ . '/../database/migrations/' => database_path('migrations'),
-        ], 'migrations');
+        ], '2fa-migrations');
 
         // Publishing views
         $this->publishes([
             __DIR__ . '/../resources/views/' => resource_path('views/vendor/2fa'),
-        ], 'views');
+        ], '2fa-views');
     }
 
     /**
