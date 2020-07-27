@@ -19,7 +19,19 @@
                         <div class="form-group text-center">
                         @if(! $user->is_two_factor_enabled)
                         <p>Please scan this barcode using <strong>Google Authenticator</strong> or <strong>Authy</strong> client Application and Click Enable Button</p>
-                            <img src="{{ $barcode }}" />
+                            <img id="barcode" src="{{ $barcode }}" />
+                        <div>
+                            <input type="number" id='pass_code' name="pass_code" autocomplete="off" class="form-control" placeholder="Enter Authy Code" required>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        </div>
                         @endif
                         </div>
                         <div class="form-group text-center">
