@@ -11,6 +11,7 @@ use Thecodework\TwoFactorAuthentication\AuthenticatesUsersWith2FA;
 use Thecodework\TwoFactorAuthentication\Contracts\TwoFactorAuthenticationInterface;
 use Thecodework\TwoFactorAuthentication\Exceptions\TwoFactorAuthenticationExceptions;
 use Thecodework\TwoFactorAuthentication\TwoFactorAuthenticationServiceProvider;
+use Session;
 
 class TwoFactorAuthenticationController extends Controller implements TwoFactorAuthenticationInterface
 {
@@ -55,6 +56,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             config('2fa-config.digest_algorithm'),
             config('2fa-config.number_of_digits')
         );
+        session(['totp' => $totp]);
         $totp->setLabel(config('2fa-config.account_name'));
         $this->updateUserWithProvisionedUri($totp->getProvisioningUri());
 
@@ -77,20 +79,26 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
      */
     public function enableTwoFactorAuthentication(Request $request)
     {
-        $user = $this->getUser();
-        $user->is_two_factor_enabled = 1;
-        $user->update();
+        $GOTP = $request->session()->get('totp');
+        $UOTP = $request->input('pass_code');
+        
+        if (isset($GOTP) && $GOTP->verify($UOTP)) {
+            $user = $this->getUser();
+            $user->is_two_factor_enabled = 1;
+            $user->update();
 
-        if ($request->ajax()) {
-            return [
-                'data' => [
-                    'message'     => 'success',
-                    'description' => '2FA Enabled',
-                ],
-            ];
+            if ($request->ajax()) {
+                return [
+                    'data' => [
+                        'message'     => 'success',
+                        'description' => '2FA Enabled',
+                    ],
+                ];
+            }
+            return redirect(config('2fa-config.redirect_to'));
+        }else{
+            return redirect('setup-2fa');
         }
-
-        return redirect(config('2fa-config.redirect_to'));
     }
 
     /**
