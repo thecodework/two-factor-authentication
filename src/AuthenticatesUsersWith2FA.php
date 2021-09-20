@@ -4,6 +4,7 @@ namespace Thecodework\TwoFactorAuthentication;
 
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use OTPHP\Factory;
 use OTPHP\TOTP;
 use Validator;
@@ -11,7 +12,7 @@ use Validator;
 trait AuthenticatesUsersWith2FA
 {
     /*
-     * Priveate variable to store user object.
+     * Private variable to store user object.
      */
     private $user;
 
@@ -33,7 +34,7 @@ trait AuthenticatesUsersWith2FA
             $signature = hash_hmac('sha256', $user->id, $secret);
             Auth::logout();
 
-            return redirect()->intended('verify-2fa?signature=' . $signature);
+            return redirect()->intended(config('2fa-config.verify-2fa') . '?signature=' . $signature);
         }
 
         return redirect()->intended(config('2fa-config.redirect_to'));
@@ -85,6 +86,9 @@ trait AuthenticatesUsersWith2FA
 
         Auth::loginUsingId($this->user->id);
 
+        if (method_exists($this, 'redirectPath')) {
+            return redirect()->intended($this->redirectPath());
+        }
         return redirect()->intended(config('2fa-config.redirect_to'));
     }
 

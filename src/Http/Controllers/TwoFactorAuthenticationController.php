@@ -56,6 +56,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             config('2fa-config.number_of_digits')
         );
         $totp->setLabel(config('2fa-config.account_name'));
+        $totp->setParameter('image', config('2fa-config.logo'));
+
         $this->updateUserWithProvisionedUri($totp->getProvisioningUri());
 
         $qrCode = new QrCode($totp->getProvisioningUri());
@@ -158,8 +160,10 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     private function updateUserWithProvisionedUri($twoFactorProvisionedUri)
     {
         $user = $this->TwoFAModel->find($this->getUser()->id);
-        if (!Schema::hasColumn(config('2fa-config.table'), 'two_factor_provisioned_uri') ||
-            !Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled')) {
+        if (
+            !Schema::hasColumn(config('2fa-config.table'), 'two_factor_provisioned_uri') ||
+            !Schema::hasColumn(config('2fa-config.table'), 'is_two_factor_enabled')
+        ) {
             throw TwoFactorAuthenticationExceptions::columnNotFound();
         }
         $user->two_factor_provisioned_uri = $twoFactorProvisionedUri;
