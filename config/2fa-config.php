@@ -2,27 +2,51 @@
 
 return [
 
+
     /*
      * Specify redirect url after when token authentication
      * is successful.
+     * used when user is not 2fa authenticated or disabling 2fa
+     * 
+     * In first Login after enabling 2-factor-authentication, default redirectTo method or varible of AuthenticateUsers will be used
      */
     'redirect_to' => '/home',
 
     /*
-     * Routes
-     * Change the routes if your existing routes
-     * conflicts with existing routes. or for
-     * any customization.
-     */
+    |--------------------------------------------------------------------------
+    | Routes
+    |--------------------------------------------------------------------------
+    |
+    | Change the routes if your existing routes conflicts with default Two-Factor Authentication Routes.
+    | Customize route name.
+    | 
+    | Route Name => Default Route Name Used
+    | Customize Name Example
+    | setup_2fa => customize_route_name
+    |
+    */
     'setup_2fa'   => 'setup-2fa',
     'enable_2fa'  => 'enable-2fa',
     'disable_2fa' => 'disable-2fa',
+    'verify-2fa' => 'verify-2fa', //get Route
+    'verify-2fa-post' => 'verify-2fa', //post
+
+    /*
+    |--------------------------------------------------------------------------
+    | LoginController
+    |--------------------------------------------------------------------------
+    |
+    | Controller used to login , default App\Http\Controllers\Auth\LoginController is used
+    | 
+    |
+    */
+    'login_controller' => '\App\Http\Controllers\Auth\LoginController',
 
     /*
      * Account name which will be used as label to show on
      * authenticator mobile application.
      */
-    'account_name' => 'Thecodework 2FA',
+    'account_name' => env('APP_NAME', 'Thecodework 2FA'),
 
     /*
      * Set Guard for 2FA
@@ -49,6 +73,7 @@ return [
     /*
      * The Number of Seconds the code will be valid.
      * Default 30.
+     * Google Authenticator only uses 30 sec period
      */
     'period' => 30,
 
@@ -59,7 +84,22 @@ return [
 
     /*
      * User Model
-     * By Default `\App\User` Model is defined.
+     * By Default `\App\Models\User` Model is defined.
      */
-    'model' => '\App\User',
+    'model' => '\App\Models\User',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Logo
+    |--------------------------------------------------------------------------
+    |
+    | Some App like Authy Use Logo .A default company logo will be used
+    | Note-* all apps support logo being sent.
+    | you can use you own logo file requirements :
+    | 1. Image File must be png 
+    | 2. Image must be public 
+    | 3. Full Uri with qualify path and protocol
+    |
+    */
+    'logo' => 'https://thecodework.com/wp-content/themes/thecodework/assets/img/thecodework_logo.png'
 ];

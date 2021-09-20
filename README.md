@@ -3,7 +3,7 @@
 [![StyleCI](https://styleci.io/repos/85341644/shield?branch=master)](https://styleci.io/repos/85341644)
 [![License](https://poser.pugx.org/thecodework/two-factor-authentication/license)](https://packagist.org/packages/thecodework/two-factor-authentication)
 
-# Laravel Two Factor Authentication (2FA) m
+# Laravel Two Factor Authentication (2FA)
 
 ![Two](http://imrealashu.in/wp-content/uploads/2017/04/Screen-Shot-2017-04-10-at-00.19.05.png)
 

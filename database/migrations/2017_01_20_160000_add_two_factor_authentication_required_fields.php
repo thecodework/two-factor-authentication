@@ -15,7 +15,7 @@ class AddTwoFactorAuthenticationRequiredFields extends Migration
     {
         Schema::table(config('2fa-config.table'), function (Blueprint $table) {
             $table->smallInteger('is_two_factor_enabled')->nullable()->default(0)->before('created_at');
-            $table->string('two_factor_provisioned_uri')->nullable()->after('is_two_factor_enabled');
+            $table->string('two_factor_provisioned_uri', 500)->nullable()->after('is_two_factor_enabled');
         });
     }
 
