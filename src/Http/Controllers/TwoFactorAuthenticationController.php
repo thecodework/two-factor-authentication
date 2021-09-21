@@ -71,7 +71,7 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
     }
 
     /**
-     * Disable 2FA.
+     * Enable 2FA.
      *
      * @param \Illuminate\Http\Request
      *
@@ -92,11 +92,11 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             ];
         }
 
-        return redirect(config('2fa-config.redirect_to'));
+        return $this->redirectUsers2FA();
     }
 
     /**
-     * Enable 2FA.
+     * Disable 2FA.
      *
      * @param \Illuminate\Http\Request
      *
@@ -118,9 +118,8 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
             ];
         }
 
-        return redirect(config('2fa-config.redirect_to'));
+        return $this->redirectUsers2FA();
     }
-
     /**
      * Verify Two Factor Authentication.
      *

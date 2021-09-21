@@ -11,6 +11,7 @@ use Validator;
 
 trait AuthenticatesUsersWith2FA
 {
+    use RedirectUsers2FA;
     /*
      * Private variable to store user object.
      */
@@ -34,10 +35,10 @@ trait AuthenticatesUsersWith2FA
             $signature = hash_hmac('sha256', $user->id, $secret);
             Auth::logout();
 
-            return redirect()->intended(config('2fa-config.verify-2fa') . '?signature=' . $signature);
+            return redirect()->intended(config('2fa-config.verify_2fa') . '?signature=' . $signature);
         }
 
-        return redirect()->intended(config('2fa-config.redirect_to'));
+        return $this->redirectUsers2FA();
     }
 
     /**
@@ -76,7 +77,7 @@ trait AuthenticatesUsersWith2FA
         $secret = getenv('HMAC_SECRET');
         $signature = hash_hmac('sha256', $this->user->id, $secret);
         if ($validator->fails()) {
-            return redirect('verify-2fa?signature=' . $signature)
+            return redirect('verify_2fa?signature=' . $signature)
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -86,10 +87,7 @@ trait AuthenticatesUsersWith2FA
 
         Auth::loginUsingId($this->user->id);
 
-        if (method_exists($this, 'redirectPath')) {
-            return redirect()->intended($this->redirectPath());
-        }
-        return redirect()->intended(config('2fa-config.redirect_to'));
+        return $this->redirectUsers2FA();
     }
 
     public function setUser($user)

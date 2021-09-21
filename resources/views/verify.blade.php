@@ -8,7 +8,7 @@
                     <strong>Verify Two Factor Authentication</strong>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{config('2fa-config.verify-2fa-post') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{config('2fa-config.verify_2fa_post') }}">
                         {{ csrf_field() }}
                         {{-- <div class="alert alert-warning">Download the <strong>Google Authenticator</strong> App on your phone from the Play Store or the App Store.</div><br/> --}}
                         <div class="form-group{{ $errors->has('totp_token') ? ' has-error' : '' }} text-center">
