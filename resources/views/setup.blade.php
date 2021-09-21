@@ -7,9 +7,9 @@
                 <div class="panel-heading">Verify Two Factor Authentication </div>
                 <div class="panel-body">
                     @if($user->is_two_factor_enabled)
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/disable-2fa') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ config('2fa-config.disable_2fa') }}">
                     @else
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/enable-2fa') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ config('2fa-config.enable_2fa') }}">
                     @endif
                         {{ csrf_field() }}
                         <div class="alert alert-warning">

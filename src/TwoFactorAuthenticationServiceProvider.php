@@ -36,7 +36,7 @@ class TwoFactorAuthenticationServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get User moded defined in config file.
+     * Get User model defined in config file.
      *
      * @return string
      */

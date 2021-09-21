@@ -6,9 +6,7 @@ return [
     /*
      * Specify redirect url after when token authentication
      * is successful.
-     * used when user is not 2fa authenticated or disabling 2fa
      * 
-     * In first Login after enabling 2-factor-authentication, default redirectTo method or varible of AuthenticateUsers will be used
      */
     'redirect_to' => '/home',
 
@@ -28,19 +26,8 @@ return [
     'setup_2fa'   => 'setup-2fa',
     'enable_2fa'  => 'enable-2fa',
     'disable_2fa' => 'disable-2fa',
-    'verify-2fa' => 'verify-2fa', //get Route
-    'verify-2fa-post' => 'verify-2fa', //post
-
-    /*
-    |--------------------------------------------------------------------------
-    | LoginController
-    |--------------------------------------------------------------------------
-    |
-    | Controller used to login , default App\Http\Controllers\Auth\LoginController is used
-    | 
-    |
-    */
-    'login_controller' => '\App\Http\Controllers\Auth\LoginController',
+    'verify_2fa' => 'verify-2fa', //get Route
+    'verify_2fa_post' => 'verify-2fa', //post
 
     /*
      * Account name which will be used as label to show on
