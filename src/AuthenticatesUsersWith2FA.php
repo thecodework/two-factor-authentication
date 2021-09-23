@@ -77,7 +77,7 @@ trait AuthenticatesUsersWith2FA
         $secret = getenv('HMAC_SECRET');
         $signature = hash_hmac('sha256', $this->user->id, $secret);
         if ($validator->fails()) {
-            return redirect('verify_2fa?signature=' . $signature)
+            return redirect(config('2fa-config.verify_2fa') . '?signature=' . $signature)
                 ->withErrors($validator)
                 ->withInput();
         }
