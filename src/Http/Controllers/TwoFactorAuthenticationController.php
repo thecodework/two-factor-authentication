@@ -3,6 +3,8 @@
 namespace Thecodework\TwoFactorAuthentication\Http\Controllers;
 
 use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use OTPHP\TOTP;
@@ -60,8 +62,11 @@ class TwoFactorAuthenticationController extends Controller implements TwoFactorA
 
         $this->updateUserWithProvisionedUri($totp->getProvisioningUri());
 
-        $qrCode = new QrCode($totp->getProvisioningUri());
-        $barcode = $qrCode->writeDataUri();
+        //Generate Qr Code
+        $writer = new PngWriter();
+        $qrCode = QrCode::create($totp->getProvisioningUri())->setEncoding(new Encoding('ISO-8859-1'));
+        $result = $writer->write($qrCode);
+        $barcode = $result->getDataUri();
 
         if ($request->ajax()) {
             return $barcode;
