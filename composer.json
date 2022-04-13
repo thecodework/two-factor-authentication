@@ -1,7 +1,7 @@
 {
   "name": "thecodework/two-factor-authentication",
   "type": "package",
-  "description": "Two Factor Authentication (2FA) for Larave",
+  "description": "Two Factor Authentication (2FA) for Laravel",
   "license": "MIT",
   "keywords": [
     "laravel",
